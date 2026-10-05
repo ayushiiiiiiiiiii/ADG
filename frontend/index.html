@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Complexity Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="shell">
+    <section class="hero card">
+      <div class="hero-copy">
+        <p class="eyebrow">Compiler Design + Machine Learning</p>
+        <h1>Time Complexity Analyzer</h1>
+        <p class="lede">
+          Paste Python or Java code, run a static analysis request, and get an estimated time complexity with an explanation.
+        </p>
+        <div class="status-row">
+          <span class="pill" id="api-status">Checking backend...</span>
+          <span class="pill muted">FastAPI + Random Forest</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="metric">
+          <span class="metric-label">Supported languages</span>
+          <strong>Python, Java</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Backend endpoint</span>
+          <strong>http://127.0.0.1:8000/api/analyze</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Response</span>
+          <strong>Complexity + confidence + features</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <section class="card editor-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Analyze Code</p>
+            <h2>Submit a snippet</h2>
+          </div>
+          <button class="ghost" id="load-example">Load example</button>
+        </div>
+
+        <form id="analysis-form" class="form">
+          <label>
+            <span>Language</span>
+            <select id="language">
+              <option value="python">Python</option>
+              <option value="java">Java</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Code</span>
+            <textarea id="code" spellcheck="false" rows="14" placeholder="Paste code here"></textarea>
+          </label>
+
+          <div class="actions">
+            <button type="submit" class="primary" id="analyze-btn">Analyze</button>
+            <button type="button" class="secondary" id="clear-btn">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card results-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Results</p>
+            <h2>Prediction output</h2>
+          </div>
+          <span class="pill neutral" id="result-state">Idle</span>
+        </div>
+
+        <div class="result-grid">
+          <article class="result-block featured">
+            <span class="result-label">Time complexity</span>
+            <strong id="complexity">—</strong>
+          </article>
+          <article class="result-block">
+            <span class="result-label">Confidence</span>
+            <strong id="confidence">—</strong>
+          </article>
+          <article class="result-block full">
+            <span class="result-label">Reason</span>
+            <p id="reason">Run an analysis to see an explanation.</p>
+          </article>
+        </div>
+
+        <div class="feature-wrap">
+          <div class="section-head compact">
+            <h3>Extracted features</h3>
+            <span class="muted-text">From backend AST analysis</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="features-table">
+                <tr>
+                  <td colspan="2" class="muted-cell">No results yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <template id="feature-row-template">
+    <tr>
+      <td class="feature-name"></td>
+      <td class="feature-value"></td>
+    </tr>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>
